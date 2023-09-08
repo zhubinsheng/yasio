@@ -42,3 +42,13 @@ jobs:
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       shell: pwsh
       run: ./build.ps1 -p android -a $env:BUILD_ARCH
+    
+    - name: Create Release
+      id: create_release
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Release ${{ steps.tag.outputs.result }}
+        draft: false
+        artifacts: "./
+        allowUpdates: true
